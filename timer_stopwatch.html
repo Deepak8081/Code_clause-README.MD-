@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .countdown {
+      font-size: 48px;
+      text-align: center;
+      height: 10hv;
+      width: 100%;
+      border: 0px;
+    }
+    label{
+      width:0%;
+      font-size: 140%;
+    }
+    input{
+        width:4.9%;
+       //background-color: black;
+        text-decoration: none;
+       //color: white;
+       position: left;
+       border: 0px;
+       font-size: 120%;
+      // text-align: center;
+
+    }
+    button{
+      margin-left: 2%;
+    }
+    .btn{
+      text-align: center;
+      margin-top:3%;
+      font-size: 160%;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown" id="countdown">
+    <input type="number" placeholder="00" autocomplete="off" maxlength="2" id="hr" value="">
+     <label style="font-size:40%; margin-left: -1%;">h</label>
+    <label class="sty">:</label>
+    <input type="number" placeholder="00" autocomplete="off" maxlength="2" id="min" value="">
+    <label style="font-size:40%; margin-left: -1%;">m</label>
+   <label>:</label>
+    <input type="number" placeholder="00" autocomplete="off" maxlength="2"id="sec" value="">
+    <label style="font-size:40%; margin-left: -1%;">s</label>
+
+  </div>
+    <div class="btn"> 
+   <button type="button" id="start">START</button>
+   <button type="button" id="stop">STOP</button>
+   <button type="button"id="reset">RESET</button>
+   </div>
+
+  <script>
+    let h=document.getElementById("hr");
+    let m=document.getElementById("min");
+    let s=document.getElementById("sec");
+    let start=document.getElementById("start");
+    let stop=document.getElementById("stop");
+     let reset=document.getElementById("reset");
+
+     let count= document.getElementById("countdown");
+
+     var interval=null;
+     var total=0;
+
+     totalvalue=()=>{
+                  total=Number(h.value)*3600+Number(m.value)*60+Number(s.value);
+     }
+     Timer=()=>{
+      totalvalue();
+      total--;
+      if(total>=0)
+      {
+        var h=Math.floor(total/3600);
+        var m = Math.floor((total/60)-(h*60));
+      var s = total-((hr*(3600)+(m*60)));
+        hr.value=h;
+        min.value=m;
+        sec.value=s;
+      }
+      else{
+          count.innerText="Time Over !!"
+      }
+     }
+      start.addEventListener('click',()=>
+      {
+        clearInterval(interval);
+        interval=setInterval(Timer,1000);
+        count.innerText="Timer Started";
+      });
+      reset.addEventListener('click',()=>
+      {
+        clearInterval(interval);
+        h.value=0;
+        m.value=0;
+        s.value=0;
+        count.innerText="00:00:00";
+        document.getElementById('display').textContent = '00:00:00';
+      });
+      function stopTimer() {
+            clearInterval(interval);
+        }
+
+     
+  </script>
+</body>
+</html>
